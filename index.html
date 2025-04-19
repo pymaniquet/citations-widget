@@ -14,6 +14,7 @@
       font-weight: bold;
       font-size: 20px;
       margin-bottom: 8px;
+      text-align: left;
     }
     .auteur {
       font-style: italic;
@@ -90,7 +91,7 @@
 
     const today = new Date();
     const index = today.getDate() % citations.length;
-    document.getElementById("quote").textContent = citations[index].texte;
+    document.getElementById("quote").textContent = "citations[index].texte";
     document.getElementById("author").textContent = citations[index].auteur;
   </script>
 </body>
