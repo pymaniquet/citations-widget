@@ -67,8 +67,7 @@
       { texte: "La beauté sauvera le monde.", auteur: "Dostoïevski" }
     ];
 
-    const today = new Date();
-    const index = today.getDate() % citations.length;
+    const index = Math.floor(Math.random() * citations.length);
     const citation = citations[index];
     document.getElementById("quote").textContent = `“${citation.texte}”`;
     document.getElementById("author").textContent = citation.auteur;
