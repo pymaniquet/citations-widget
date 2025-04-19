@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Citation du jour</title>
+  <style>
+    body {
+      background-color: white;
+      font-family: "Angsana New", serif;
+      text-align: center;
+      padding: 60px;
+    }
+    .citation {
+      font-weight: bold;
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+    .auteur {
+      font-style: italic;
+      text-align: right;
+      margin-right: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div id="quote-container">
+    <p class="citation" id="quote"></p>
+    <p class="auteur" id="author"></p>
+  </div>
+
+  <script>
+    const citations = [
+      { texte: "Le pouvoir de l’imagination nous rend infinis.", auteur: "John Muir" },
+      { texte: "L’avenir appartient à ceux qui croient à la beauté de leurs rêves.", auteur: "Eleanor Roosevelt" },
+      { texte: "Sois le changement que tu veux voir dans le monde.", auteur: "Mahatma Gandhi" },
+      { texte: "Le courage, c’est de chercher la vérité et de la dire.", auteur: "Jean Jaurès" },
+      { texte: "On ne subit pas l’avenir, on le fait.", auteur: "Georges Bernanos" },
+      { texte: "La vraie générosité envers l’avenir consiste à tout donner au présent.", auteur: "Albert Camus" },
+      { texte: "La simplicité est la sophistication suprême.", auteur: "Léonard de Vinci" },
+      { texte: "L’enthousiasme est à la base de tout progrès.", auteur: "Henry Ford" },
+      { texte: "L’intelligence, c’est la capacité de s’adapter au changement.", auteur: "Stephen Hawking" },
+      { texte: "La plus grande gloire n’est pas de ne jamais tomber, mais de se relever à chaque chute.", auteur: "Confucius" },
+      { texte: "On ne voit bien qu’avec le cœur. L’essentiel est invisible pour les yeux.", auteur: "Antoine de Saint-Exupéry" },
+      { texte: "Ce n’est pas le vent qui décide de ta destination, c’est l’orientation que tu donnes à ta voile.", auteur: "Jim Rohn" },
+      { texte: "Ils ne savaient pas que c’était impossible, alors ils l’ont fait.", auteur: "Mark Twain" },
+      { texte: "Le succès n’est pas la clé du bonheur. Le bonheur est la clé du succès.", auteur: "Albert Schweitzer" },
+      { texte: "Ne juge pas chaque jour à la récolte que tu fais mais aux graines que tu sèmes.", auteur: "Robert Louis Stevenson" },
+      { texte: "La seule chose que vous pouvez vraiment contrôler, c’est votre réaction à ce qui vous arrive.", auteur: "Viktor Frankl" },
+      { texte: "Le bonheur n’est réel que lorsqu’il est partagé.", auteur: "Christopher McCandless" },
+      { texte: "Tout ce qui mérite d’être fait mérite d’être bien fait.", auteur: "Philip Stanhope" },
+      { texte: "La meilleure façon de prédire l’avenir, c’est de le créer.", auteur: "Peter Drucker" },
+      { texte: "Il n’est jamais trop tard pour devenir ce que l’on aurait pu être.", auteur: "George Eliot" },
+      { texte: "L’expérience est le nom que chacun donne à ses erreurs.", auteur: "Oscar Wilde" },
+      { texte: "Fais de ta vie un rêve, et d’un rêve, une réalité.", auteur: "Antoine de Saint-Exupéry" },
+      { texte: "La vie, c’est comme une bicyclette, il faut avancer pour ne pas perdre l’équilibre.", auteur: "Albert Einstein" },
+      { texte: "Rien de grand ne s’est accompli sans passion.", auteur: "Hegel" },
+      { texte: "Un voyage de mille lieues commence toujours par un premier pas.", auteur: "Lao Tseu" },
+      { texte: "Il n’y a pas de vent favorable pour celui qui ne sait pas où il va.", auteur: "Sénèque" },
+      { texte: "La connaissance parle, mais la sagesse écoute.", auteur: "Jimi Hendrix" },
+      { texte: "Ce n’est pas parce que les choses sont difficiles que nous n’osons pas les faire.", auteur: "Sénèque" },
+      { texte: "Il faut porter du chaos en soi pour accoucher d’une étoile qui danse.", auteur: "Nietzsche" },
+      { texte: "Ce n’est pas en regardant la lumière qu’on devient lumineux, mais en plongeant dans son obscurité.", auteur: "Carl Gustav Jung" },
+      { texte: "Le futur n’est pas ce qui va arriver, mais ce que nous allons faire.", auteur: "Henri Bergson" },
+      { texte: "L’homme n’est pas le produit de son environnement, c’est son environnement qui est son produit.", auteur: "Jacques Ellul" },
+      { texte: "Ce n’est pas parce que les choses sont inaccessibles que nous devons y renoncer.", auteur: "Vaclav Havel" },
+      { texte: "L’homme se découvre quand il se mesure avec l’obstacle.", auteur: "Antoine de Saint-Exupéry" },
+      { texte: "La plus grande liberté est celle de choisir sa pensée.", auteur: "Krishnamurti" },
+      { texte: "La vraie révolution commence à l’intérieur de soi.", auteur: "Jiddu Krishnamurti" },
+      { texte: "Le monde ne sera pas détruit par ceux qui font le mal, mais par ceux qui les regardent sans rien faire.", auteur: "Albert Einstein" },
+      { texte: "Chaque jour est une petite vie.", auteur: "Schopenhauer" },
+      { texte: "Ce qui ne me tue pas me rend plus fort.", auteur: "Nietzsche" },
+      { texte: "Le silence est parfois la plus belle des réponses.", auteur: "Lao Tseu" },
+      { texte: "Le bonheur est parfois caché dans l’inconnu.", auteur: "Victor Hugo" },
+      { texte: "La lumière ne se voit qu’en présence de l’ombre.", auteur: "Carl Gustav Jung" },
+      { texte: "La pensée crée le monde, mais c’est l’amour qui le transforme.", auteur: "Teilhard de Chardin" },
+      { texte: "La seule façon d’apporter la paix au monde est d’être soi-même en paix.", auteur: "Le Dalaï Lama" },
+      { texte: "La paix commence par un sourire.", auteur: "Mère Teresa" },
+      { texte: "N’attends pas l’occasion parfaite, saisis l’instant et rends-le parfait.", auteur: "Marc-Aurèle" },
+      { texte: "La liberté commence là où l’ignorance finit.", auteur: "Victor Hugo" },
+      { texte: "L’espérance est un risque à courir.", auteur: "Georges Bernanos" },
+      { texte: "L’humanité est une grande famille : nous partageons plus que ce qui nous sépare.", auteur: "Robert Schuman" },
+      { texte: "La démocratie est le pire des systèmes à l’exception de tous les autres.", auteur: "Winston Churchill" },
+      { texte: "L’avenir est toujours une construction présente.", auteur: "Paul Ricoeur" },
+      { texte: "L’utopie n’est pas l’irréalisable, mais l’irréalisé.", auteur: "Théodore Monod" },
+      { texte: "La beauté sauvera le monde.", auteur: "Dostoïevski" }
+    ];
+
+    const today = new Date();
+    const index = today.getDate() % citations.length;
+    document.getElementById("quote").textContent = `"${citations[index].texte}"`;
+    document.getElementById("author").textContent = citations[index].auteur;
+  </script>
+</body>
+</html>
